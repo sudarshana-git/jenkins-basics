@@ -38,10 +38,18 @@ pipeline {
             }
         }
 
-        stage('Lint and test') {
-            steps {
-                sh "echo Linting code in the main stage"
-                sh "echo Formatting code in the main stage"
+        stage('Lint and format') {
+            stages {
+                stage ('Linting') {
+                    steps {
+                         sh "echo Linting code in the main stage"
+                    }
+                }
+                stage ('formatting') {
+                    steps {
+                         sh "echo Linting code in the main stage"
+                    }
+                }
             }
         }
 
