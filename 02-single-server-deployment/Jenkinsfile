@@ -34,7 +34,7 @@ pipeline {
                         unzip -o /home/ec2-user/myapp.zip -d /home/ec2-user/app/
                         source app/venv/bin/activate
                         cd /home/ec2-user/app/
-                        pip install -r requirements.txt
+                        pip install -r 02-single-server-deployment/requirements.txt
                         sudo systemctl restart flaskapp.service
 EOF
                     '''
