@@ -6,17 +6,17 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        /* stage('Checkout') {
             steps {
                 git url: 'https://github.com/sudarshana-git/jenkins-basics/',branch: 'main'
                 sh "ls -ltr"
                 
             }
-        } 
+        }  */
 
         stage('Setup') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'ec2-jenkins-server-creds', usernameVariable: "myuser", passwordVariable: "mypassword")]) {
+                /* withCredentials([usernamePassword(credentialsId: 'ec2-jenkins-server-creds', usernameVariable: "myuser", passwordVariable: "mypassword")]) {
 
                     sh '''
                     echo ${myuser}
@@ -26,7 +26,7 @@ pipeline {
 
                 echo "my creds: ${SERVER}"
                 echo "username: ${SERVER_USR}"
-                echo "password: ${SERVER_PSW}"
+                echo "password: ${SERVER_PSW}" */
 
                 sh "pip install -r requirements.txt"
             
