@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'sanjeevkt720/jenkins-flask-app'
+        IMAGE_NAME = 'suda93/jenkins-flask-app'
         IMAGE_TAG = "${IMAGE_NAME}:${env.GIT_COMMIT}"
         
     }
@@ -12,18 +12,20 @@ pipeline {
 
         stage('Setup') {
             steps {
-                sh "pip install -r requirements.txt"
+                sh "pip install -r 04-docker/requirements.txt"
             }
         }
         stage('Test') {
             steps {
-                sh "pytest"
+                dir('04-docker'){
+                    sh "pytest"
+                }
             }
         }
 
         stage('Login to docker hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'Docker-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 sh 'echo ${PASSWORD} | docker login -u ${USERNAME} --password-stdin'}
                 echo 'Login successfully'
             }
