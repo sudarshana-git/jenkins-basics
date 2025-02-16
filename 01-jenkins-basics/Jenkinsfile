@@ -38,7 +38,19 @@ pipeline {
                     sh "pytest"
                 }  
             }
-        }    
+        }  
+        stage('Lint and test') {
+            stage ('Linting'){
+                steps {
+                    sh "echo Linting code in nested stage" 
+                }
+                stage ('Formatting'){
+                    steps {
+                        sh "echo formatting code in nested stage" 
+                    }
+                }
+            }
+        }  
         stage('Deployment') {
             input {
                 message "Do you want to proceed further?"
