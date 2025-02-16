@@ -28,14 +28,15 @@ pipeline {
                 echo "username: ${SERVER_USR}"
                 echo "password: ${SERVER_PSW}" */
 
-                sh "pip install -r requirements.txt"
+                sh "pip install -r 01-jenkins-basics/requirements.txt"
             
             }
         }
         stage('Test') {
             steps {
-                sh "pytest"
-                
+                dir('01-jenkins-basics'){
+                    sh "pytest"
+                }  
             }
         }    
         stage('Deployment') {
