@@ -10,14 +10,12 @@ pipeline {
             steps {
                 git url: 'https://github.com/sudarshana-git/jenkins-basics/',branch: 'main'
                 sh "ls -ltr"
-                
             }
         }  */
 
         stage('Setup') {
             steps {
                 /* withCredentials([usernamePassword(credentialsId: 'ec2-jenkins-server-creds', usernameVariable: "myuser", passwordVariable: "mypassword")]) {
-
                     sh '''
                     echo ${myuser}
                     echo ${mypassword}
@@ -29,28 +27,24 @@ pipeline {
                 echo "password: ${SERVER_PSW}" */
 
                 sh "pip install -r 01-jenkins-basics/requirements.txt"
-            
             }
         }
+
         stage('Test') {
             steps {
-                dir('01-jenkins-basics'){
+                dir('01-jenkins-basics') {
                     sh "pytest"
-                }  
+                }
             }
-        }  
+        }
+
         stage('Lint and test') {
-            stage ('Linting'){
-                steps {
-                    sh "echo Linting code in nested stage" 
-                }
+            steps {
+                sh "echo Linting code in the main stage"
+                sh "echo Formatting code in the main stage"
             }
-            stage ('Formatting'){
-                steps {
-                    sh "echo formatting code in nested stage" 
-                }
-            }
-        }  
+        }
+
         stage('Deployment') {
             input {
                 message "Do you want to proceed further?"
@@ -58,10 +52,7 @@ pipeline {
             }
             steps {
                 echo "Running Deployment"
-                
             }
-        } 
-        
-            
+        }
     }
 }
