@@ -1,7 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        SERVER = credentials('ec2-jenkins-server-creds')
+    }
+
     stages {
+        
 
 
         stage('Setup') {
@@ -13,6 +18,10 @@ pipeline {
                     echo ${mypassword}
                     '''
                 }
+
+                echo "my creds: ${SERVER}"
+                echo "username: ${SERVER_USR}"
+                echo "password: ${SERVER_PSW}"
 
                 sh "pip install -r requirements.txt"
             
