@@ -39,7 +39,7 @@ pipeline {
         }
 
         stage('Lint and format') {
-            stages {
+            parallel {
                 stage ('Linting') {
                     steps {
                          sh "echo Linting code in the main stage"
