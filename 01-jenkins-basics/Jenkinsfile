@@ -6,12 +6,17 @@ pipeline {
     }
 
     stages {
-        
-
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/sudarshana-git/jenkins-basics/',branch: 'main'
+                sh "ls -ltr"
+                
+            }
+        } 
 
         stage('Setup') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'server-creds', usernameVariable: "myuser", passwordVariable: "mypassword")]) {
+                withCredentials([usernamePassword(credentialsId: 'ec2-jenkins-server-creds', usernameVariable: "myuser", passwordVariable: "mypassword")]) {
 
                     sh '''
                     echo ${myuser}
